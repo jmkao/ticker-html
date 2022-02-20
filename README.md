@@ -27,3 +27,9 @@ The recommended OBS Browser source height and width will be shown in the console
 The browser source width and height should be set to the recommended computed value from the Console output as described above.
 
 The vertical distance for the move animation should be set to the entry height.
+
+## Multiple Stylings
+
+The performer data is separated into `data.js` so that if you need multiple stylings, you can make copies of `ticker.html` and have them all refer to the same `data.js`.
+
+If there are some stylings that don't need all of the lines, you can add `display: none;` to the CSS class of a line.
