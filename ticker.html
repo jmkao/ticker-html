@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .entry {
+        /* Adjust width and height until your design fits without being truncated */
+        /* OBS browser source should have its width set to this width */
+        /* OBS browser source should have its height set to this height times # entries (or open in a browser and open the console log to see the calculation automatically) */
+        width: 300px;
+        height: 100px;
+
+        /* Don't change this */
+        overflow: hidden !important;
+      }
+
+      .line1 {
+        color: white;
+        font-family: 'Didact Gothic';
+        font-weight: bold;
+        font-size: 20pt;
+        margin-bottom: -8px;
+      }
+      .line2 {
+        color: white;
+        font-family: 'Didact Gothic';
+        font-weight: normal;
+        font-size: 18pt;
+        margin-bottom: -1px;
+      }
+      .line3 {
+        color: white;
+        font-family: 'Didact Gothic';
+        font-weight: bold;
+        font-size: 12pt;
+      }
+
+
+      body {
+        text-shadow:
+          4px 0px 4px cyan,
+          0px 4px 4px cyan,
+          -4px -4px 8px cyan,
+          4px -4px 8px cyan,
+          -4px 4px 8px cyan,
+          4px 4px 8px cyan;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="ticker">
+      <div v-for="entry in data" class="entry">
+        <div v-if="entry[0]" class="row no-gutters col line1">
+          <span v-html="entry[0]"></span>
+        </div>
+        <div v-if="entry[1]" class="row no-gutters col line2">
+          <span v-html="entry[1]"></span>
+        </div>
+        <div v-if="entry[2]" class="row no-gutters col line3">
+          <span v-html="entry[2]"></span>
+        </div>
+      </div>
+    </div>
+    <div class="entry"></div>
+    <script src="./data.js"></script>
+    <script>
+      var app = new Vue({
+        el: '#ticker',
+        data: {
+          data: null
+        },
+        mounted: function() {
+          this.data = data;
+
+          const entryElement = document.querySelector(".entry");
+          const style = getComputedStyle(entryElement);
+          const entryWidth = style.width;
+          const entryHeight = style.height;
+
+          console.log("Entry width: "+entryWidth);
+          console.log("Entry height: "+entryHeight);
+          console.log("# Entries: "+ this.data.length);
+          console.log("Minimum OBS browser source width: "+parseInt(entryWidth,10))
+          console.log("Minimum OBS browser source height: "+(this.data.length*parseInt(entryHeight,10)));
+        }
+      });
+    </script>
+  </body>
+</html>
